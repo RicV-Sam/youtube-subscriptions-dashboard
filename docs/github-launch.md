@@ -1,6 +1,6 @@
 # GitHub launch checklist
 
-These are proposed publication settings, not a claim that they are already enabled.
+Publication status: the description and topics below are applied. Private vulnerability reporting, dependency alerts, secret scanning and push protection are enabled. The first published revision passed Windows and Linux checks. Social-preview customisation, a tagged release and branch protection remain optional follow-up items.
 
 ## About and discovery
 

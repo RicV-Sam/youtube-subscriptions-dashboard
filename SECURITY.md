@@ -2,7 +2,7 @@
 
 Do not post credentials, personal data or exploit details in public issues.
 
-Use GitHub's **Security → Report a vulnerability** option if it is enabled. If that option is unavailable, open an issue requesting a private reporting channel without describing the vulnerability or including sensitive information. No private reporting address or response-time guarantee is provided here.
+Private vulnerability reporting is enabled. Use GitHub's **Security → Report a vulnerability** option. If you cannot access that option, request a private reporting channel without describing the vulnerability or including sensitive information in public. No response-time guarantee is provided.
 
 This is a local application. Do not expose the development server or launcher companion to the public internet. Keep browser profiles and library exports private. OAuth setup and a production hosting design need separate review before operating a shared service.
 

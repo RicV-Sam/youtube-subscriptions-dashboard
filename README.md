@@ -68,7 +68,7 @@ npm run test:tooling
 npm run build
 ```
 
-The GitHub workflow runs privacy checks, tests and a build on Windows and Linux with Node.js 24. Workflow execution on GitHub begins only after publication. Mocked tests cannot verify your Google project's consent settings or real account access.
+The GitHub workflow runs privacy checks, tests and a build on Windows and Linux with Node.js 24. See the [GitHub Actions results](https://github.com/RicV-Sam/youtube-subscriptions-dashboard/actions) for the published revisions. Mocked tests cannot verify your Google project's consent settings or real account access.
 
 The toolchain uses Vite for development/builds, Vitest for browser tests and ESLint for source checks. Review [maintenance notes](docs/maintenance.md) before planning a hosted deployment. This repository is intended for local use; `npm start` is a development server.
 
