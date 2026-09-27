@@ -1,0 +1,36 @@
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencies and generated output
+/node_modules/
+/build/
+/.preview-build/
+/coverage/
+
+# Private reviews, exports and browser state
+/review/
+/private/
+/backups/
+*library*.json
+!package-lock.json
+*.log
+.DS_Store
+Thumbs.db
+
+# Browser automation and local audits
+/output/
+/.playwright-cli/
+/.publication-audit/
+*.har
+*.trace
+*.zip
+*.db
+*.sqlite*
+*.pfx
+*.p12
+credentials*.json
+client_secret*.json
