@@ -2,7 +2,7 @@
 
 Keep changes focused and describe the problem, resulting behaviour and validation. Discuss major changes in an issue before implementation. No contribution or review turnaround is guaranteed.
 
-1. Fork and clone the repository; use Node.js 24 and `npm ci`.
+1. Fork and clone the repository; use Node.js 24.15.0 or newer within the Node.js 24 release line and `npm ci`. Prefer the latest patched Node.js 24 release; `.nvmrc` selects that release line.
 2. Use `npm run demo` for synthetic UI work. Real sign-in requires your own local OAuth configuration.
 3. Preserve read-only YouTube access, account separation, export validation and launcher process-ownership checks.
 4. Run `npm run check:privacy`, `npm test`, `npm run test:launcher`, `npm run test:tooling` and `npm run build`.

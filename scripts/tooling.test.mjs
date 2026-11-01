@@ -1,8 +1,24 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdir, writeFile, rm } from 'node:fs/promises';
+import { mkdir, writeFile, rm, stat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'vite';
+import { ESLint } from 'eslint';
+
+test('ESLint checks source and tooling patterns while ignoring generated output', async () => {
+  const root = fileURLToPath(new URL('../', import.meta.url));
+  const eslint = new ESLint({ cwd: root });
+  for (const [filePath, code] of [
+    ['src/lint-probe.jsx', 'export default function Probe() { return <main>{missingValue}</main>; }'],
+    ['scripts/lint-probe.mjs', 'export const value = missingValue;'],
+  ]) {
+    const [result] = await eslint.lintText(code, { filePath });
+    assert.ok(result.messages.some(message => message.ruleId === 'no-undef'), `${filePath} must be linted`);
+  }
+  for (const directory of ['build', '.preview-build', 'node_modules', 'output', '.publication-audit']) {
+    assert.equal(await eslint.isPathIgnored(`${root}/${directory}/probe.js`), true, `${directory} must stay ignored`);
+  }
+});
 
 test('Vite serves the app, exposes only the configured client ID and blocks private files', async () => {
   const root = fileURLToPath(new URL('../', import.meta.url));
@@ -30,9 +46,11 @@ test('Vite serves the app, exposes only the configured client ID and blocks priv
     const code = (await app.text()) + (await environment.text());
     assert.ok(code.includes('synthetic-tooling-client'));
     assert.ok(!code.includes('synthetic-private-value'));
-    for (const pathname of ['/.git/config', `/.publication-audit/tooling-probe-${process.pid}.txt`]) {
+    const gitMetadata = await stat(new URL('../.git', import.meta.url));
+    const gitPath = gitMetadata.isDirectory() ? '/.git/config' : '/.git';
+    for (const pathname of [gitPath, `/.publication-audit/tooling-probe-${process.pid}.txt`]) {
       const response = await fetch(origin + pathname);
-      assert.equal(response.status, 403);
+      assert.equal(response.status, 403, `${pathname} must be blocked`);
       assert.ok(!(await response.text()).includes('private-test-content'));
     }
     const icon = await fetch(`${origin}/feed.svg`);
