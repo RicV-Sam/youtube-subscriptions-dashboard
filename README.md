@@ -21,7 +21,7 @@ Browse the channels you chose, search loaded uploads, and decide what to watch n
 
 ## Try the demo without a Google account
 
-Install Node.js 24 and npm, then:
+Install Node.js 24.15.0 or newer within the Node.js 24 release line, and npm, then:
 
 ```sh
 git clone https://github.com/RicV-Sam/youtube-subscriptions-dashboard.git
